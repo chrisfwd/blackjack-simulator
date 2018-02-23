@@ -4,7 +4,8 @@ const GameSimulator = require('./js/GameSimulator.js');
 (function(){
 
     var game = new GameSimulator({
-        betAmount: 10
+        betAmount: 10,
+        hands: 1
     });
 
     game.start();

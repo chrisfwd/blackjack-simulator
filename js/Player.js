@@ -13,6 +13,8 @@ module.exports = class Player {
 
     playHand(options){
 
+        console.log('player playing...');
+
         let stay = false,
             dealerCard = options.dealerShows,
             cardTotal = 0;
@@ -28,7 +30,7 @@ module.exports = class Player {
             }
 
             let action = decisionTable[cardTotal][dealerCard];
-            console.log('player action', action);
+            //console.log('player action', action);
 
             if(action === 'DH'){
                 if(this.canDouble){
@@ -48,9 +50,10 @@ module.exports = class Player {
                     break;
                 case 'H': // Hit
                     this.hand.push(this.deck.pickCard());
-                    console.log('player has', this.cardTotal());
+                    console.log('hit', this.hand, this.cardTotal());
                     break;
                 case 'S': // Stay
+                    console.log('stay');
                     stay = true;
                     break;
                 default: break;
@@ -80,7 +83,16 @@ module.exports = class Player {
 
     bet(amount){
 
+        console.log('player cash', this.cash);
+        console.log('player bets', amount);
+
+        // return if player doesnt have enough cash
+        if(this.cash < amount) return 0;
+
         this.betAmount = amount;
+        this.cash -= amount;
+
+        return this.betAmount;
 
     }
 
