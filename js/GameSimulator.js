@@ -28,6 +28,10 @@ module.exports = class GameSimulator {
             //    dealerCard = this.dealer.hand[0],
             //    betAmount = this.player.bet;
 
+            // clear player's and dealer's hands & bets
+            this.player.reset();
+            this.dealer.reset();
+
             // place bets
             let playerDidBet = this.player.bet(this.betAmount);
 

@@ -8,8 +8,18 @@ module.exports = class Player {
         this.deck = params.deck;
         this.betAmount = 0;
         this.hand = [];
+        this.canDouble = true;
 
     }
+
+
+    reset(){
+
+        this.betAmount = 0;
+        this.hand = [];
+
+    }
+
 
     playHand(options){
 
@@ -33,7 +43,7 @@ module.exports = class Player {
             //console.log('player action', action);
 
             if(action === 'DH'){
-                if(this.canDouble){
+                if(this.canDouble && this.canBet(this.betAmount)){
                     action = 'D';
                 } else {
                     action = 'H';
@@ -42,7 +52,9 @@ module.exports = class Player {
 
             switch(action){
                 case 'D': // Double down
-                    this.betAmount *= 2;
+                    this.bet(this.betAmount);
+                    this.hand.push(this.deck.pickCard());
+                    console.log('Double down', this.hand, this.cardTotal(), 'new bet amount: ', this.betAmount);
                     break;
                 case 'P': // sPlit
                     // split functionality
@@ -81,16 +93,24 @@ module.exports = class Player {
     }
 
 
-    bet(amount){
+    canBet(betAmount){
 
-        console.log('player cash', this.cash);
-        console.log('player bets', amount);
+        return this.cash >= betAmount;
+
+    }
+
+
+    bet(betAmount){
 
         // return if player doesnt have enough cash
-        if(this.cash < amount) return 0;
+        if(!this.canBet(betAmount)) return 0;
 
-        this.betAmount = amount;
-        this.cash -= amount;
+        this.betAmount += betAmount;
+
+        this.cash -= betAmount;
+
+        console.log('player cash', this.cash);
+        console.log('player bets', this.betAmount);
 
         return this.betAmount;
 

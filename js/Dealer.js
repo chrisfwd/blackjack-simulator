@@ -8,6 +8,13 @@ module.exports = class Dealer {
     }
 
 
+    reset(){
+
+        this.hand = [];
+
+    }
+
+
     playHand(){
 
         console.log('dealer playing...');
