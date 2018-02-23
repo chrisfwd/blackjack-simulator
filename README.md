@@ -8,7 +8,7 @@ Test different scenarios by changing the logic tables
 
 Convert a logic table to json and pass it in to the new GameSimulator() to change the logic
 
-Take a look at ./js/decisionTable.js and https://wizardofodds.com/games/blackjack/strategy/4-decks/ for examples
+Take a look at [./js/decisionTable.js](./js/decisionTable.js) and https://wizardofodds.com/games/blackjack/strategy/4-decks/ for examples
 
 ## Runs on Node
 
