@@ -9,6 +9,8 @@ Take a look at logicTable.js for an example
 
 **Runs on Node
 
+clone the repo
+
 to run:
 ```
 node index.js
