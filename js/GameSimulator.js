@@ -1,7 +1,7 @@
 const Dealer = require('./Dealer');
 const Player = require('./Player');
 const Deck = require('./Deck');
-//const decisionTable = require('decisionTable');
+const defaultDecisionMap = require('./decisionTable');
 
 module.exports = class GameSimulator {
 
@@ -12,7 +12,11 @@ module.exports = class GameSimulator {
 
         this.deck = new Deck({numDecks:4});
         this.dealer = new Dealer({deck: this.deck});
-        this.player = new Player({cash:100.00, deck: this.deck});
+        this.player = new Player({
+            cash:100.00,
+            deck: this.deck,
+            decisionMap: settings.decisionMap || defaultDecisionMap
+        });
 
     }
 
@@ -68,12 +72,12 @@ module.exports = class GameSimulator {
 
         if(playerWins){
             this.player.cash += this.player.betAmount * 2;
-            console.log('player wins', this.player.betAmount * 2);
+            console.log('Winner: Player', '$'+this.player.betAmount * 2);
         } else if(push){
             this.player.cash += this.player.betAmount;
         } else {
             // dealer wins
-            console.log('Winner: Dealer');
+            console.log('Winner: House');
             // betAmount goes to house
         }
 

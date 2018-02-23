@@ -1,9 +1,8 @@
-const decisionTable = require('./decisionTable');
-
 module.exports = class Player {
 
     constructor(params){
 
+        this.decisionMap = params.decisionMap;
         this.cash = params.cash || 10.00;
         this.deck = params.deck;
         this.betAmount = 0;
@@ -34,12 +33,13 @@ module.exports = class Player {
 
             cardTotal = this.cardTotal();
 
-            if(!decisionTable[cardTotal]) {
+            if(!this.decisionMap[cardTotal]) {
                 stay = true;
                 break;
             }
 
-            let action = decisionTable[cardTotal][dealerCard];
+            // use the map to decide what decision to make
+            let action = this.decisionMap[cardTotal][dealerCard];
             //console.log('player action', action);
 
             if(action === 'DH'){
