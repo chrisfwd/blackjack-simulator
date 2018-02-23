@@ -6,9 +6,9 @@ See the effects of the decisions to make when playing blackjack
 
 Test different scenarios by changing the logic tables
 
-Convert a logic table to json and require() it in  to change the logic
+Convert a logic table to json and pass it in to the new GameSimulator() to change the logic
 
-Take a look at logicTable.js and https://wizardofodds.com/games/blackjack/strategy/4-decks/ for an example
+Take a look at js/logicTable.js and https://wizardofodds.com/games/blackjack/strategy/4-decks/ for examples
 
 ## Runs on Node
 
