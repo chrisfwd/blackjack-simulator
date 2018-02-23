@@ -1,11 +1,14 @@
 # blackjack-simulator
+
 See the effects of the decisions to make when playing blackjack
 
 ## logic based on blackjack logic tables
 
-Convert a logic table to json and import it to change the logic
+Test different scenarios by changing the logic tables
 
-Take a look at logicTable.js for an example
+Convert a logic table to json and require() it in  to change the logic
+
+Take a look at logicTable.js and https://wizardofodds.com/games/blackjack/strategy/4-decks/ for an example
 
 ## Runs on Node
 
