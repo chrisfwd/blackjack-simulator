@@ -2,7 +2,7 @@ module.exports = class Deck {
 
     constructor(settings){
 
-        this.suitCards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 1];
+        this.suitCards = [2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, "A"];
         this.singleDeck = this.suitCards.concat(this.suitCards, this.suitCards, this.suitCards);
         this.cards = this.refreshDeck(settings.numDecks || 8);
 

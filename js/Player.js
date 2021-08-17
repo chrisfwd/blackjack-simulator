@@ -26,21 +26,32 @@ module.exports = class Player {
 
         let stay = false,
             dealerCard = options.dealerShows,
-            cardTotal = 0;
+            cardTotal = 0,
+            aces = this.hand.filter(card => card === 'A').length;
 
         // decide to hit, stay, double, split
         while(!stay){
 
             cardTotal = this.cardTotal();
 
-            if(!this.decisionMap[cardTotal]) {
+            const map = aces ? this.decisionMap.soft : this.decisionMap.hard;
+
+            if(!map[cardTotal]) {
                 stay = true;
                 break;
             }
 
             // use the map to decide what decision to make
-            let action = this.decisionMap[cardTotal][dealerCard];
-            //console.log('player action', action);
+            let action = map[cardTotal][dealerCard];
+            // console.log('player action', action);
+
+            if(action === 'DS'){
+                if(this.canDouble && this.canBet(this.betAmount)){
+                    action = 'D';
+                } else {
+                    action = 'S';
+                }
+            }
 
             if(action === 'DH'){
                 if(this.canDouble && this.canBet(this.betAmount)){
@@ -81,11 +92,21 @@ module.exports = class Player {
     cardTotal(){
 
         let total = 0;
+        const aces = this.hand.filter(card => card === 'A');
 
         this.hand.forEach((cardValue) => {
 
-            total += cardValue;
+            const adjustedCardValue = (cardValue === 'A') ? 11 : cardValue;
 
+            total += adjustedCardValue;
+
+        });
+
+        // account for Aces
+        aces.forEach(() => {
+            if(total > 21){
+                total -= 10;
+            }
         });
 
         return total;
@@ -116,4 +137,4 @@ module.exports = class Player {
 
     }
 
-}
+};

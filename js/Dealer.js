@@ -47,15 +47,25 @@ module.exports = class Dealer {
     cardTotal(){
 
         let total = 0;
+        const aces = this.hand.filter(card => card === 'A');
 
         this.hand.forEach((cardValue) => {
 
-            total += cardValue;
+            const adjustedCardValue = (cardValue === 'A') ? 11 : cardValue;
 
+            total += adjustedCardValue;
+
+        });
+
+        // account for Aces
+        aces.forEach(() => {
+            if(total > 21){
+                total -= 10;
+            }
         });
 
         return total;
 
     }
 
-}
+};
